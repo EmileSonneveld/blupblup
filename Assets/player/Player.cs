@@ -34,6 +34,8 @@ public class Player : MonoBehaviour {
 		characterController=GetComponent<CharacterController>();
 	}
 
+	//penis
+
 	void OnTriggerEnter(Collider collider){
 		if(collider.gameObject.CompareTag("node")){
 			isInPlantingZone++;
