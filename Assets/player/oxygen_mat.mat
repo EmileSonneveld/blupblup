@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: node_mat
+  m_Name: oxygen_mat
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _LIGHTMAPPING_REALTIME
   m_CustomRenderQueue: -1
@@ -104,7 +104,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: 0
+        second: .582000017
       data:
         first:
           name: _BumpScale
@@ -132,7 +132,7 @@ Material:
       data:
         first:
           name: _Metallic
-        second: .560000002
+        second: .363999993
     m_Colors:
       data:
         first:
@@ -141,7 +141,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .253027707, g: .764705896, b: .298902303, a: 1}
+        second: {r: .151708469, g: .434427589, b: .897058845, a: 1}
       data:
         first:
           name: _EmissionColorUI
