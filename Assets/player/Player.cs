@@ -60,6 +60,7 @@ public class Player : MonoBehaviour {
 			var plant = collider.GetComponent<plant>();
 			plant.Die();
 			oxygenLevel += plant.GetOxygenLevel();
+			GestionSound.instance.soundplantHarvest();
 		}
 	}
 	
@@ -147,8 +148,14 @@ public class Player : MonoBehaviour {
 
 		Vector3 direction = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
 
+		if (direction.magnitude > 0.1f)
+			GestionSound.instance.walksound = true;
+		else
+			GestionSound.instance.walksound = false;
+
 		if ( Input.GetAxis("Jump") > 0.001f && characterController.isGrounded){
 			y_speed = jump_fact*gravity;
+			GestionSound.instance.soundJump();
 		}else{
 			direction.y = y_speed; 
 			if( !characterController.isGrounded){
@@ -172,6 +179,7 @@ public class Player : MonoBehaviour {
 		if( isPlanting ){
 			plantingProgress += Time.deltaTime;
 			if ( plantingProgress > 2 ){
+				GestionSound.instance.soundplantPlante();
 				noderef.plant();
 				isPlanting = false;
 				GameObject temp = (GameObject) Instantiate(plant, this.transform.position + this.transform.forward * 2 + Vector3.down*1.75f, plant.transform.rotation);
@@ -193,6 +201,7 @@ public class Player : MonoBehaviour {
 		RaycastHit hitInfo;
 		if (Physics.Raycast(transform.position, fwd,out hitInfo, 1,1<<9)){
 			hitInfo.collider.gameObject.GetComponent<Corail>().applydomage(5);
+			GestionSound.instance.soundHit();
 		}
 	}
 

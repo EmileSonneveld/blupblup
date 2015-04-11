@@ -30,6 +30,7 @@ public class Corail : MonoBehaviour {
 		pv-=damage;
 		if(pv<0){
 			Destroy(gameObject);
+			GestionSound.instance.soundDestroyCoral();
 		}
 	}
 
