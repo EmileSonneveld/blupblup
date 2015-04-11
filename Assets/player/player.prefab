@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3383260}
   - 23: {fileID: 2309078}
   - 143: {fileID: 14376686}
+  - 114: {fileID: 11483218}
   m_Layer: 0
   m_Name: player
   m_TagString: Untagged
@@ -44,7 +45,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145732}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.92999983, y: -.789999962, z: -10.1499996}
+  m_LocalPosition: {x: 0, y: .493999988, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 462900}
@@ -143,6 +144,21 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145732}
   m_Enabled: 1
+--- !u!114 &11483218
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5183fdb45bdf1bf44bf498e36d7bfac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterController: {fileID: 0}
+  mouseMultiply: 4
+  movementMultiply: 9
+  camera: {fileID: 0}
 --- !u!124 &12425346
 Behaviour:
   m_ObjectHideFlags: 1
