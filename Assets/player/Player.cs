@@ -1,10 +1,20 @@
 using UnityEngine;
 using System.Collections;
 
+enum State
+{
+	menu,
+	falling,
+	playing,
+	dead
+};
+
 public class Player : MonoBehaviour {
-	
+
+	private State playerState = State.menu;
+
 	CharacterController characterController;
-	private float viewDirCam=0;
+	private float viewDirCam=89;
 	private float viewDirPlayer=0;
 	public float mouseMultiply = 4;
 	public float movementMultiply = 9;
@@ -22,11 +32,16 @@ public class Player : MonoBehaviour {
 
 	float y_speed = .0f;
 
+	ParticleSystem psBulles;
+	Camera menuCam;
+
 
 	public GameObject plant;
 
 	// Use this for initialization
 	void Start () {
+		psBulles = GameObject.Find("menuSystem").GetComponent<ParticleSystem>();
+		menuCam = GameObject.Find("menuCamera").GetComponent<Camera>();
 		oxyGo = transform.FindChild("CameraUi/oxygen").gameObject;
 		initialOxyPos = oxyGo.transform.localPosition;
 
@@ -54,6 +69,7 @@ public class Player : MonoBehaviour {
 		}
 	}
 
+
 	// Update is called once per frame
 	void Update () {
 
@@ -66,6 +82,52 @@ public class Player : MonoBehaviour {
 		}
 
 
+		viewDirCam +=  -Input.GetAxis("Mouse Y") * mouseMultiply;
+		camera_ref.transform.localRotation = Quaternion.Euler(new Vector3(viewDirCam,0,0));
+		
+		viewDirPlayer +=  Input.GetAxis("Mouse X") * mouseMultiply;
+		this.transform.rotation = Quaternion.Euler(new Vector3(0,viewDirPlayer,0));
+
+
+
+
+		switch( playerState ){
+
+		case State.menu:
+			if( Input.GetKeyDown(KeyCode.Space)){
+				playerState = State.falling;
+			}
+			//RenderSettings.fogColor = new Color(90, 90, 165);
+			RenderSettings.fogDensity = 0.2f;
+			break;
+
+		case State.falling:
+			menuCam.enabled = false;
+			psBulles.Pause();
+			y_speed = -3;
+			playBehaviour();
+			//RenderSettings.fogColor = Color.Lerp( RenderSettings.fogColor, Color.blue, 0.1f);
+			RenderSettings.fogDensity += (0.02f - RenderSettings.fogDensity)*0.02f;
+
+			if( characterController.isGrounded ){
+				playerState = State.playing;
+			}
+
+			break;
+
+		case State.playing:
+			playBehaviour();
+			break;
+
+		case State.dead:
+			break;
+		}
+
+		
+	}
+
+
+	void playBehaviour(){
 		if ( oxygenLevel > 0 )
 		{
 			oxygenLevel -= Time.deltaTime * 2;
@@ -74,7 +136,7 @@ public class Player : MonoBehaviour {
 				oxyGo.transform.localScale.x, 
 				w,
 				oxyGo.transform.localScale.z
-			);
+				);
 			Vector3 tmp = initialOxyPos;
 			tmp.y = initialOxyPos.y + w;
 			oxyGo.transform.localPosition = tmp;
@@ -82,37 +144,31 @@ public class Player : MonoBehaviour {
 			oxygenLevel = 0;
 		}
 
-		Vector3 direction = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
-		viewDirCam +=  -Input.GetAxis("Mouse Y") * mouseMultiply;
-		camera_ref.transform.localRotation = Quaternion.Euler(new Vector3(viewDirCam,0,0));
 
-		viewDirPlayer +=  Input.GetAxis("Mouse X") * mouseMultiply;
-		this.transform.rotation = Quaternion.Euler(new Vector3(0,viewDirPlayer,0));
+		Vector3 direction = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
 
 		if ( Input.GetAxis("Jump") > 0.001f && characterController.isGrounded){
 			y_speed = jump_fact*gravity;
 		}else{
-			direction.y = y_speed; //(characterController.velocity.y - 9.81f)*Time.deltaTime;
+			direction.y = y_speed; 
 			if( !characterController.isGrounded){
 				y_speed -= gravity  *Time.deltaTime;
 			}else{
 				y_speed=0;
 			}
 		}
-		//Debug.Log(characterController.velocity.y);
-
+		
 		if(isPlanting)
 			direction*=0;
-		//direction.y = characterController.velocity.y;
 		characterController.Move(this.transform.rotation*direction * Time.deltaTime * movementMultiply);
-
-
+		
+		
 		if ( Input.GetAxis("Fire1")>0.001f && !isPlanting && isInPlantingZone > 0 && noderef.canplant()){
 			isPlanting = true;
 			plantingProgress = 0;
 			Debug.Log ("planting in progress...");
 		}
-
+		
 		if( isPlanting ){
 			plantingProgress += Time.deltaTime;
 			if ( plantingProgress > 2 ){
@@ -122,14 +178,14 @@ public class Player : MonoBehaviour {
 				temp.GetComponent<plant>().noderef=noderef;
 			}
 		}
-
+		
 		if( Input.GetAxis("Fire1") > 0.01f && !attaque){
 			tryattack();
 			attaque=true;
 		}else if (Input.GetAxis("Fire1") < 0.001f){
 			attaque=false;
 		}
-		
+
 	}
 
 	void tryattack(){
@@ -138,11 +194,6 @@ public class Player : MonoBehaviour {
 		if (Physics.Raycast(transform.position, fwd,out hitInfo, 1,1<<9)){
 			hitInfo.collider.gameObject.GetComponent<Corail>().applydomage(5);
 		}
-
-		
-
-
-
 	}
 
 
