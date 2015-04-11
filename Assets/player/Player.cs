@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
 	public float jump_fact = 0.35f;
 	public float gravity = 1;
 	private bool attaque=false;
+	private node noderef;
 
 	float y_speed = .0f;
 
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour {
 	void OnTriggerEnter(Collider collider){
 		if(collider.gameObject.CompareTag("node")){
 			isInPlantingZone++;
+			noderef=collider.gameObject.GetComponent<node>();
 		}else if(collider.gameObject.CompareTag("plant")){
 			var plant = collider.GetComponent<plant>();
 			plant.Die();
@@ -92,7 +94,7 @@ public class Player : MonoBehaviour {
 		characterController.Move(this.transform.rotation*direction * Time.deltaTime * movementMultiply);
 
 
-		if ( Input.GetAxis("Fire1")>0.001f && !isPlanting && isInPlantingZone > 0 ){
+		if ( Input.GetAxis("Fire1")>0.001f && !isPlanting && isInPlantingZone > 0 && noderef.canplant()){
 			isPlanting = true;
 			plantingProgress = 0;
 			Debug.Log ("planting in progress...");
@@ -101,8 +103,10 @@ public class Player : MonoBehaviour {
 		if( isPlanting ){
 			plantingProgress += Time.deltaTime;
 			if ( plantingProgress > 5 ){
+				noderef.plant();
 				isPlanting = false;
-				Instantiate(plant, this.transform.position + this.transform.forward * 2 + Vector3.down*1.75f, plant.transform.rotation);
+				GameObject temp = (GameObject) Instantiate(plant, this.transform.position + this.transform.forward * 2 + Vector3.down*1.75f, plant.transform.rotation);
+				temp.GetComponent<plant>().noderef=noderef;
 			}
 		}
 
@@ -119,7 +123,6 @@ public class Player : MonoBehaviour {
 		Vector3 fwd = camera_ref.transform.TransformDirection(Vector3.forward);
 		RaycastHit hitInfo;
 		if (Physics.Raycast(transform.position, fwd,out hitInfo, 1,1<<9)){
-			Debug.Log(hitInfo.collider.gameObject.layer);
 			hitInfo.collider.gameObject.GetComponent<Corail>().applydomage(5);
 		}
 

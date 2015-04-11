@@ -8,6 +8,7 @@ public class plant : MonoBehaviour {
 	bool isVisible = false;
 	GameObject player;
 	public float minGrowDistance = 20;
+	public node noderef;
 
 	bool isDying = false;
 
@@ -18,7 +19,7 @@ public class plant : MonoBehaviour {
 
 	public float GetOxygenLevel()
 	{
-		return growingState * 20;
+		return noderef.getO2();
 	}
 
 	// Use this for initialization
