@@ -54,7 +54,6 @@ public class Player : MonoBehaviour {
 	void OnTriggerEnter(Collider collider){
 		if(collider.gameObject.CompareTag("node")){
 			isInPlantingZone++;
-			Debug.Log("lalalalla");
 			noderef=collider.gameObject.GetComponent<node>();
 		}else if(collider.gameObject.CompareTag("plant")){
 			var plant = collider.GetComponent<plant>();
