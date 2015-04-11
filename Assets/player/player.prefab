@@ -48,6 +48,12 @@ GameObject:
   - 92: {fileID: 9216088}
   - 124: {fileID: 12425346}
   - 81: {fileID: 8179640}
+  - 114: {fileID: 11409642}
+  - 114: {fileID: 11440348}
+  - 114: {fileID: 11489384}
+  - 114: {fileID: 11476654}
+  - 114: {fileID: 11480400}
+  - 114: {fileID: 11470232}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -106,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.11199999, y: -.465000004, z: 1.26600003}
+  m_LocalPosition: {x: -1.05299997, y: -.469999999, z: 1.26999998}
   m_LocalScale: {x: .140922621, y: .140922621, z: .140922621}
   m_Children: []
   m_Father: {fileID: 417380}
@@ -287,6 +293,96 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 166358}
   m_Enabled: 0
+--- !u!114 &11409642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 654895381cf9ada439e0816732504c24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vortex_ref:
+  - {fileID: 11489384}
+  - {fileID: 11476654}
+  - {fileID: 11480400}
+  - {fileID: 11470232}
+--- !u!114 &11440348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd70d448b18cfbc46af26466f752332c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualizeFocus: 0
+  focalLength: 2.20000005
+  focalSize: 2
+  aperture: 36.4599991
+  focalTransform: {fileID: 0}
+  maxBlurSize: 2
+  highResolution: 0
+  blurType: 0
+  blurSampleCount: 2
+  nearBlur: 0
+  foregroundOverlap: 1
+  dofHdrShader: {fileID: 4800000, guid: acd613035ff3e455e8abf23fdc8c8c24, type: 3}
+  dx11BokehShader: {fileID: 4800000, guid: d8e82664aa8686642a424c88ab10164a, type: 3}
+  dx11BokehThreshold: .5
+  dx11SpawnHeuristic: .0874999985
+  dx11BokehTexture: {fileID: 2800000, guid: a4cdca73d61814d33ac1587f6c163bca, type: 3}
+  dx11BokehScale: 1.20000005
+  dx11BokehIntensity: 2.5
+--- !u!114 &11470232
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a94b781cad112c75d0008dfa8d76c639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 708b781cad112c75d0008dfa8d76c639, type: 3}
+  radius: {x: .5, y: .5}
+  angle: 15
+  center: {x: .75, y: .75}
+--- !u!114 &11476654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a94b781cad112c75d0008dfa8d76c639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 708b781cad112c75d0008dfa8d76c639, type: 3}
+  radius: {x: .5, y: .5}
+  angle: 15
+  center: {x: .25, y: .75}
+--- !u!114 &11480400
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a94b781cad112c75d0008dfa8d76c639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 708b781cad112c75d0008dfa8d76c639, type: 3}
+  radius: {x: .5, y: .5}
+  angle: 15
+  center: {x: .75, y: .75}
 --- !u!114 &11483218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -303,8 +399,23 @@ MonoBehaviour:
   camera_ref: {fileID: 0}
   isInPlantingZone: 0
   jump_fact: .349999994
-  gravity: 3
+  gravity: 1
   plant: {fileID: 199182, guid: f2774eaab41d6ff4996f2802a6ef408b, type: 2}
+--- !u!114 &11489384
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a94b781cad112c75d0008dfa8d76c639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 708b781cad112c75d0008dfa8d76c639, type: 3}
+  radius: {x: .5, y: .5}
+  angle: 15
+  center: {x: .25, y: .25}
 --- !u!124 &12425346
 Behaviour:
   m_ObjectHideFlags: 1

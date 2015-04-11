@@ -3,9 +3,9 @@ using System.Collections;
 
 public class node : MonoBehaviour {
 
-	public int nbrmaxplant;
-	public int maxO2;
-	public int minO2;
+	public int nbrmaxplant = 3;
+	public int maxO2 = 100;
+	public int minO2 = 50;
 	private bool isplant=false;
 	// Use this for initialization
 	void Start () {

@@ -39,6 +39,7 @@ public class Player : MonoBehaviour {
 	void OnTriggerEnter(Collider collider){
 		if(collider.gameObject.CompareTag("node")){
 			isInPlantingZone++;
+			Debug.Log("lalalalla");
 			noderef=collider.gameObject.GetComponent<node>();
 		}else if(collider.gameObject.CompareTag("plant")){
 			var plant = collider.GetComponent<plant>();
@@ -55,9 +56,19 @@ public class Player : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		if (Input.GetKeyDown (KeyCode.Backspace)) {
+			if (Cursor.lockState == CursorLockMode.None) {
+				Cursor.lockState = CursorLockMode.Locked;
+			} else {
+				Cursor.lockState = CursorLockMode.None;
+			}
+		}
+
+
 		if ( oxygenLevel > 0 )
 		{
-			oxygenLevel -= Time.deltaTime * 5;
+			oxygenLevel -= Time.deltaTime * 2;
 			float w = oxygenLevel / 100;
 			oxyGo.transform.localScale = new Vector3(
 				oxyGo.transform.localScale.x, 
@@ -104,7 +115,7 @@ public class Player : MonoBehaviour {
 
 		if( isPlanting ){
 			plantingProgress += Time.deltaTime;
-			if ( plantingProgress > 5 ){
+			if ( plantingProgress > 2 ){
 				noderef.plant();
 				isPlanting = false;
 				GameObject temp = (GameObject) Instantiate(plant, this.transform.position + this.transform.forward * 2 + Vector3.down*1.75f, plant.transform.rotation);
