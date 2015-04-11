@@ -202,9 +202,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 2029318, guid: a14a83401999dc84488796e7f126351d, type: 2}
-      propertyPath: m_ClearFlags
-      value: 3
+    - target: {fileID: 11483218, guid: a14a83401999dc84488796e7f126351d, type: 2}
+      propertyPath: gravity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a14a83401999dc84488796e7f126351d, type: 2}
@@ -251,21 +251,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c12622220757f904782c234c0dc5d18d, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &396267116
-GameObject:
-  m_PrefabParentObject: {fileID: 199182, guid: f2774eaab41d6ff4996f2802a6ef408b, type: 2}
-  m_PrefabInternal: {fileID: 858938734}
---- !u!114 &396267117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 396267116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62c3bea28820c6940a857ab963af757c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &423408925
 Prefab:
   m_ObjectHideFlags: 0
@@ -405,8 +390,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 199182, guid: f2774eaab41d6ff4996f2802a6ef408b, type: 2}
-      propertyPath: m_StaticEditorFlags
+    - target: {fileID: 13607270, guid: f2774eaab41d6ff4996f2802a6ef408b, type: 2}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -423,7 +408,7 @@ GameObject:
   - 33: {fileID: 1362407013}
   - 64: {fileID: 1362407012}
   - 23: {fileID: 1362407011}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

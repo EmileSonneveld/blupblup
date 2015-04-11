@@ -15,6 +15,11 @@ public class Player : MonoBehaviour {
 	private GameObject oxyGo;
 	float oxygenLevel = 100;
 	Vector3 initialOxyPos;
+	public float jump_fact = 0.35f;
+	public float gravity = 1;
+
+	float y_speed = .0f;
+
 
 	public GameObject plant;
 
@@ -30,6 +35,10 @@ public class Player : MonoBehaviour {
 	void OnTriggerEnter(Collider collider){
 		if(collider.gameObject.CompareTag("node")){
 			isInPlantingZone++;
+		}else if(collider.gameObject.CompareTag("plant")){
+			var plant = collider.GetComponent<plant>();
+			plant.Die();
+			oxygenLevel += plant.GetOxygenLevel();
 		}
 	}
 	
@@ -64,12 +73,21 @@ public class Player : MonoBehaviour {
 		viewDirPlayer +=  Input.GetAxis("Mouse X") * mouseMultiply;
 		this.transform.rotation = Quaternion.Euler(new Vector3(0,viewDirPlayer,0));
 
-		if ( Input.GetAxis("Jump") > 0.001f){
-			direction += new Vector3(0, 10, 0);
+		if ( Input.GetAxis("Jump") > 0.001f && characterController.isGrounded){
+			y_speed = jump_fact*gravity;
+		}else{
+			direction.y = y_speed; //(characterController.velocity.y - 9.81f)*Time.deltaTime;
+			if( !characterController.isGrounded){
+				y_speed -= gravity  *Time.deltaTime;
+			}else{
+				y_speed=0;
+			}
 		}
+		//Debug.Log(characterController.velocity.y);
 
 		if(isPlanting)
 			direction*=0;
+		//direction.y = characterController.velocity.y;
 		characterController.Move(this.transform.rotation*direction * Time.deltaTime * movementMultiply);
 
 
@@ -83,7 +101,7 @@ public class Player : MonoBehaviour {
 			plantingProgress += Time.deltaTime;
 			if ( plantingProgress > 5 ){
 				isPlanting = false;
-				Instantiate(plant, this.transform.position + this.transform.forward * 2, plant.transform.rotation);
+				Instantiate(plant, this.transform.position + this.transform.forward * 2 + Vector3.down*1.75f, plant.transform.rotation);
 			}
 		}
 		

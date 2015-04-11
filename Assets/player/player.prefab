@@ -300,8 +300,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseMultiply: 4
   movementMultiply: 9
-  camera: {fileID: 0}
+  camera_ref: {fileID: 0}
   isInPlantingZone: 0
+  jump_fact: .349999994
+  gravity: 3
   plant: {fileID: 199182, guid: f2774eaab41d6ff4996f2802a6ef408b, type: 2}
 --- !u!124 &12425346
 Behaviour:
