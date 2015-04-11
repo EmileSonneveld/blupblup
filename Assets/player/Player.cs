@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
 	Vector3 initialOxyPos;
 	public float jump_fact = 0.35f;
 	public float gravity = 1;
+	private bool attaque=false;
 
 	float y_speed = .0f;
 
@@ -104,7 +105,28 @@ public class Player : MonoBehaviour {
 				Instantiate(plant, this.transform.position + this.transform.forward * 2 + Vector3.down*1.75f, plant.transform.rotation);
 			}
 		}
+
+		if( Input.GetAxis("Fire1") > 0.01f && !attaque){
+			tryattack();
+			attaque=true;
+		}else if (Input.GetAxis("Fire1") < 0.001f){
+			attaque=false;
+		}
 		
+	}
+
+	void tryattack(){
+		Vector3 fwd = camera_ref.transform.TransformDirection(Vector3.forward);
+		RaycastHit hitInfo;
+		if (Physics.Raycast(transform.position, fwd,out hitInfo, 1,1<<9)){
+			Debug.Log(hitInfo.collider.gameObject.layer);
+			hitInfo.collider.gameObject.GetComponent<Corail>().applydomage(5);
+		}
+
+		
+
+
+
 	}
 
 
