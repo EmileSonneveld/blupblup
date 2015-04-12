@@ -123,7 +123,7 @@ public class Player : MonoBehaviour {
 			y_speed = -3;
 			playBehaviour();
 			//RenderSettings.fogColor = Color.Lerp( RenderSettings.fogColor, Color.blue, 0.1f);
-			RenderSettings.fogDensity += (0.02f - RenderSettings.fogDensity)*0.02f;
+			RenderSettings.fogDensity += (0.012f - RenderSettings.fogDensity)*0.2f;
 
 			if( characterController.isGrounded ){
 				playerState = State.playing;

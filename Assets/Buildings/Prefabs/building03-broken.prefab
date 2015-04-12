@@ -13,7 +13,7 @@ GameObject:
   - 65: {fileID: 6563428}
   - 54: {fileID: 5458718}
   m_Layer: 0
-  m_Name: polySurface2
+  m_Name: pilar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ GameObject:
   - 65: {fileID: 6504416}
   - 54: {fileID: 5403492}
   m_Layer: 0
-  m_Name: polySurface3
+  m_Name: pilar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ GameObject:
   - 65: {fileID: 6593776}
   - 54: {fileID: 5431354}
   m_Layer: 0
-  m_Name: polySurface5
+  m_Name: pilar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -104,7 +104,7 @@ GameObject:
   - 65: {fileID: 6544780}
   - 54: {fileID: 5449830}
   m_Layer: 0
-  m_Name: polySurface9
+  m_Name: pilar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,7 +142,7 @@ GameObject:
   - 65: {fileID: 6593662}
   - 54: {fileID: 5412808}
   m_Layer: 0
-  m_Name: polySurface7
+  m_Name: pilar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ GameObject:
   - 65: {fileID: 6511796}
   - 54: {fileID: 5439736}
   m_Layer: 0
-  m_Name: polySurface4
+  m_Name: pilar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +199,7 @@ GameObject:
   - 65: {fileID: 6546426}
   - 54: {fileID: 5464906}
   m_Layer: 0
-  m_Name: polySurface8
+  m_Name: pilar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +218,7 @@ GameObject:
   - 65: {fileID: 6573418}
   - 54: {fileID: 5457874}
   m_Layer: 0
-  m_Name: polySurface6
+  m_Name: pilar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -237,7 +237,7 @@ GameObject:
   - 65: {fileID: 6570098}
   - 54: {fileID: 5456780}
   m_Layer: 0
-  m_Name: polySurface1
+  m_Name: pilar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -395,9 +395,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 103880}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.1000004, y: .689999998, z: -20.5499992}
-  m_LocalScale: {x: 1.77441692, y: 1.77441692, z: 1.77441692}
+  m_LocalRotation: {x: 0, y: .943849504, z: 0, w: .33037582}
+  m_LocalPosition: {x: -141.699997, y: 7.4000001, z: -56.2000008}
+  m_LocalScale: {x: 2.39166284, y: 2.39166284, z: 2.39166284}
   m_Children:
   - {fileID: 461444}
   - {fileID: 499108}
