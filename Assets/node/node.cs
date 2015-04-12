@@ -8,6 +8,7 @@ public class node : MonoBehaviour {
 	public int minO2 = 50;
 	private bool isplant=false;
 	private ParticleSystem particule;
+	public Destroys target;
 	// Use this for initialization
 	void Start () {
 		particule=GetComponent<ParticleSystem>();
@@ -32,6 +33,8 @@ public class node : MonoBehaviour {
 		if(nbrmaxplant>0)
 			particule.Play();
 		isplant=false;
+		if(target)
+			target.Destroybuilding();
 		return Random.Range(minO2,maxO2);
 	}
 

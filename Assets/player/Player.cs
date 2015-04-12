@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 enum State
 {
 	menu,
 	falling,
 	playing,
+	win,
 	dead
 };
 
@@ -31,7 +33,11 @@ public class Player : MonoBehaviour {
 	private node noderef;
 
 	private text_script walloftext;
+	public Text textDie;
+	public Text textWin;
 	private Animator hammer;
+
+	float respawnTimer = float.PositiveInfinity;
 
 	float y_speed = .0f;
 
@@ -44,6 +50,9 @@ public class Player : MonoBehaviour {
 
 	private Renderer blueliquid;
 
+	public Camera overviewCam;
+
+
 	// Use this for initialization
 	void Start () {
 		psBulles = GameObject.Find("menuSystem").GetComponent<ParticleSystem>();
@@ -54,6 +63,9 @@ public class Player : MonoBehaviour {
 		hammer=GameObject.Find("hands-animation").GetComponent<Animator>();
 		blueliquid= GameObject.Find("blueliquid").GetComponent<Renderer>();
 		//initialOxyPos = oxyGo.transform.localPosition;
+		
+		textDie.enabled = false;
+		textWin.enabled = false;
 
 		this.camera_ref = Camera.main;
 		characterController=GetComponent<CharacterController>();
@@ -70,7 +82,16 @@ public class Player : MonoBehaviour {
 			plant.Die();
 			oxygenLevel = Mathf.Min(oxygenLevel + plant.GetOxygenLevel(),100);
 			GestionSound.instance.soundplantHarvest();
-		}
+		}else if(collider.gameObject.name=="tresure"){
+			playerState = State.win;
+			gameObject.transform.GetChild(0).gameObject.SetActive(false);
+			transformScaphandre.gameObject.SetActive(false);
+			respawnTimer = 4.200001f;
+			Rigidbody[] allRigiBody = Object.FindObjectsOfType(typeof(Rigidbody)) as Rigidbody[];
+			foreach(Rigidbody thisrigidpenis in allRigiBody){
+				thisrigidpenis.isKinematic=false;
+			}
+		} 
 	}
 	
 	void OnTriggerExit(Collider collider){
@@ -82,8 +103,14 @@ public class Player : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
 
+		respawnTimer -= Time.deltaTime;
+		if( respawnTimer < 0) 
+			Application.LoadLevel(Application.loadedLevel);
+		
+		if (Input.GetKeyDown (KeyCode.X)) {
+			oxygenLevel = 1;
+		}
 
 		if (Input.GetKeyDown (KeyCode.Backspace)) {
 			if (Cursor.lockState == CursorLockMode.None) {
@@ -142,6 +169,14 @@ public class Player : MonoBehaviour {
 			break;
 
 		case State.dead:
+			RenderSettings.fogDensity += (1f - RenderSettings.fogDensity)*0.1f;
+			break;
+			
+		case State.win:
+			this.camera_ref.enabled = false;
+			overviewCam.enabled = true;
+			RenderSettings.fogDensity += (0f - RenderSettings.fogDensity)*0.1f;
+			textWin.enabled = true;
 			break;
 		}
 
@@ -152,7 +187,7 @@ public class Player : MonoBehaviour {
 	void playBehaviour(){
 		if ( oxygenLevel > 0 )
 		{
-			oxygenLevel -= Time.deltaTime * 2;
+			oxygenLevel -= Time.deltaTime * 1.5f;
 			float w = oxygenLevel / 100;
 			/*oxyGo.transform.localScale = new Vector3(
 				oxyGo.transform.localScale.x, 
@@ -165,6 +200,18 @@ public class Player : MonoBehaviour {
 		}else{
 			oxygenLevel = 0;
 		}
+
+		if(oxygenLevel<40){
+			GestionSound.instance.soundHeavyBreath();
+			if(oxygenLevel<=0){
+				respawnTimer = 4;
+				this.playerState = State.dead;
+				this.camera_ref.enabled = false;
+				overviewCam.enabled = true;
+				textDie.enabled = true;
+			}
+		}
+
 
 		Material tempmat = blueliquid.material;
 		tempmat.SetTextureOffset("_MainTex",new Vector2(0,0.95f-0.25f*oxygenLevel/100));

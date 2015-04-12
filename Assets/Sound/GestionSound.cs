@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GestionSound : MonoBehaviour {
@@ -11,6 +11,7 @@ public class GestionSound : MonoBehaviour {
 	public AudioClip destroyCoral;
 	public AudioClip plantPlante;
 	public AudioClip plantharvest;
+	public AudioSource heavyBreath;
 
 	public AudioSource Walk;
 	public AudioClip[] StepClip;
@@ -53,5 +54,11 @@ public class GestionSound : MonoBehaviour {
 
 	public void soundplantHarvest(){
 		audioSource.PlayOneShot(plantharvest);
+	}
+
+	public void soundHeavyBreath(){
+		if(!heavyBreath.isPlaying){
+			heavyBreath.Play();
+		}
 	}
 }

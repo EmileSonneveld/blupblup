@@ -19,6 +19,7 @@ public class plant : MonoBehaviour {
 
 	public float GetOxygenLevel()
 	{
+		if(!noderef) return 25;
 		return noderef.getO2();
 	}
 

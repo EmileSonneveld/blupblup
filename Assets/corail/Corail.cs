@@ -7,11 +7,18 @@ public class Corail : MonoBehaviour {
 	private float frenquencecolor;
 	private float pv=100;
 	private Material material;
+	private Color temp;
+
+	float dieTimer = float.PositiveInfinity;
+
+
+	private ParticleSystem particle;
 	// Use this for initialization
 	void Start () {
 		offsetcolor = Random.Range(0,255);
 		frenquencecolor = Random.Range(30,50);
 		material=GetComponent<Renderer>().material;
+		particle=GetComponent<ParticleSystem>();
 	}
 	
 	// Update is called once per frame
@@ -24,14 +31,31 @@ public class Corail : MonoBehaviour {
 		Color temp = ColorFromHSV(h,s,v);
 		material.color=temp;
 
+
+		
+		dieTimer -= Time.deltaTime;
+		if (dieTimer <0){
+			Destroy(gameObject);
+		}
+		if (dieTimer != float.PositiveInfinity){
+			transform.localScale *= 0.9f;
+		}
+
 	}
 
 	public void applydomage(int damage){
 		pv-=damage;
+		particle.startColor=ColorFromHSV((Time.time*frenquencecolor+offsetcolor)%360,0.8f,0.8f);
+		particle.time=-0.1f;
+		particle.Play();
+		particle.Emit(10);
 		if(pv<0){
-			Destroy(gameObject);
+			dieTimer = 5;
+			GetComponent<BoxCollider>().enabled = false;
 			GestionSound.instance.soundDestroyCoral();
 		}
+
+
 	}
 
 	public static Color ColorFromHSV(float h, float s, float v, float a = 1)
