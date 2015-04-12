@@ -30,11 +30,14 @@ public class Player : MonoBehaviour {
 	private bool attaque=false;
 	private node noderef;
 
+	private text_script walloftext;
+
 	float y_speed = .0f;
 
 	ParticleSystem psBulles;
 	Camera menuCam;
 
+	Transform transformScaphandre;
 
 	public GameObject plant;
 
@@ -42,7 +45,9 @@ public class Player : MonoBehaviour {
 	void Start () {
 		psBulles = GameObject.Find("menuSystem").GetComponent<ParticleSystem>();
 		menuCam = GameObject.Find("menuCamera").GetComponent<Camera>();
-		oxyGo = transform.FindChild("CameraUi/oxygen").gameObject;
+		walloftext = GameObject.Find("Textwalloftext").GetComponent<text_script>();
+		oxyGo = GameObject.Find("oxygenMeter");
+		transformScaphandre = GameObject.Find("CameraUI").transform;
 		initialOxyPos = oxyGo.transform.localPosition;
 
 		this.camera_ref = Camera.main;
@@ -72,6 +77,8 @@ public class Player : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		
+
 
 		if (Input.GetKeyDown (KeyCode.Backspace)) {
 			if (Cursor.lockState == CursorLockMode.None) {
@@ -82,6 +89,7 @@ public class Player : MonoBehaviour {
 		}
 
 
+
 		viewDirCam +=  -Input.GetAxis("Mouse Y") * mouseMultiply;
 		camera_ref.transform.localRotation = Quaternion.Euler(new Vector3(viewDirCam,0,0));
 		
@@ -89,6 +97,14 @@ public class Player : MonoBehaviour {
 		this.transform.rotation = Quaternion.Euler(new Vector3(0,viewDirPlayer,0));
 
 
+		
+		transformScaphandre.rotation = camera_ref.transform.rotation;
+		//transformScaphandre.rotation = Quaternion.Euler(new Vector3(0,viewDirPlayer,0));
+		/*Quaternion.Lerp( 
+		                                               camera_ref.transform.rotation, 
+		                                               transformScaphandre.rotation, 
+		                                               0.2f
+		                                               );*/
 
 
 		switch( playerState ){
@@ -111,6 +127,7 @@ public class Player : MonoBehaviour {
 
 			if( characterController.isGrounded ){
 				playerState = State.playing;
+				walloftext.StartWallOfDeath();
 			}
 
 			break;
@@ -198,7 +215,7 @@ public class Player : MonoBehaviour {
 	void tryattack(){
 		Vector3 fwd = camera_ref.transform.TransformDirection(Vector3.forward);
 		RaycastHit hitInfo;
-		if (Physics.Raycast(transform.position, fwd,out hitInfo, 1,1<<9)){
+		if (Physics.Raycast(transform.position, fwd,out hitInfo, 1.5f,1<<9)){
 			hitInfo.collider.gameObject.GetComponent<Corail>().applydomage(5);
 			GestionSound.instance.soundHit();
 		}

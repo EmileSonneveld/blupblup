@@ -1,0 +1,93 @@
+fileFormatVersion: 2
+guid: f5edd94a698919f4cbc1eab7236a7a72
+timeCreated: 1428800744
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: casque
+    100002: contourvisiere
+    100004: contourvisiere1
+    100006: grillage1
+    100008: //RootNode
+    100010: tuyauo2
+    400000: casque
+    400002: contourvisiere
+    400004: contourvisiere1
+    400006: grillage1
+    400008: //RootNode
+    400010: tuyauo2
+    2300000: casque
+    2300002: contourvisiere
+    2300004: contourvisiere1
+    2300006: grillage1
+    2300008: tuyauo2
+    3300000: casque
+    3300002: contourvisiere
+    3300004: contourvisiere1
+    3300006: grillage1
+    3300008: tuyauo2
+    4300000: tuyauo2
+    4300002: grillage1
+    4300004: contourvisiere
+    4300006: casque
+    4300008: contourvisiere1
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
