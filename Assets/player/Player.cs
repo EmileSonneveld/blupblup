@@ -22,7 +22,7 @@ public class Player : MonoBehaviour {
 	bool isPlanting = false;
 	float plantingProgress = 0;
 	public int isInPlantingZone = 0;
-	private GameObject oxyGo;
+	//private GameObject oxyGo;
 	float oxygenLevel = 100;
 	Vector3 initialOxyPos;
 	public float jump_fact = 0.35f;
@@ -31,6 +31,7 @@ public class Player : MonoBehaviour {
 	private node noderef;
 
 	private text_script walloftext;
+	private Animator hammer;
 
 	float y_speed = .0f;
 
@@ -41,14 +42,18 @@ public class Player : MonoBehaviour {
 
 	public GameObject plant;
 
+	private Renderer blueliquid;
+
 	// Use this for initialization
 	void Start () {
 		psBulles = GameObject.Find("menuSystem").GetComponent<ParticleSystem>();
 		menuCam = GameObject.Find("menuCamera").GetComponent<Camera>();
 		walloftext = GameObject.Find("Textwalloftext").GetComponent<text_script>();
-		oxyGo = GameObject.Find("oxygenMeter");
+		//oxyGo = GameObject.Find("oxygenMeter");
 		transformScaphandre = GameObject.Find("CameraUI").transform;
-		initialOxyPos = oxyGo.transform.localPosition;
+		hammer=GameObject.Find("hands-animation").GetComponent<Animator>();
+		blueliquid= GameObject.Find("blueliquid").GetComponent<Renderer>();
+		//initialOxyPos = oxyGo.transform.localPosition;
 
 		this.camera_ref = Camera.main;
 		characterController=GetComponent<CharacterController>();
@@ -149,17 +154,21 @@ public class Player : MonoBehaviour {
 		{
 			oxygenLevel -= Time.deltaTime * 2;
 			float w = oxygenLevel / 100;
-			oxyGo.transform.localScale = new Vector3(
+			/*oxyGo.transform.localScale = new Vector3(
 				oxyGo.transform.localScale.x, 
 				w,
 				oxyGo.transform.localScale.z
 				);
 			Vector3 tmp = initialOxyPos;
 			tmp.y = initialOxyPos.y + w;
-			oxyGo.transform.localPosition = tmp;
+			oxyGo.transform.localPosition = tmp;*/
 		}else{
 			oxygenLevel = 0;
 		}
+
+		Material tempmat = blueliquid.material;
+		tempmat.SetTextureOffset("_MainTex",new Vector2(0,0.95f-0.25f*oxygenLevel/100));
+		blueliquid.material=tempmat;
 
 
 		Vector3 direction = new Vector3(Input.GetAxis("Horizontal"),0,Input.GetAxis("Vertical"));
@@ -218,6 +227,7 @@ public class Player : MonoBehaviour {
 		if (Physics.Raycast(transform.position, fwd,out hitInfo, 1.5f,1<<9)){
 			hitInfo.collider.gameObject.GetComponent<Corail>().applydomage(5);
 			GestionSound.instance.soundHit();
+			hammer.SetTrigger("Frappe");
 		}
 	}
 
