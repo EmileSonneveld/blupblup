@@ -40,7 +40,7 @@ public class Player : MonoBehaviour {
 
 	Transform transformScaphandre;
 
-	public GameObject plant;
+	public GameObject[] plantliste;
 
 	private Renderer blueliquid;
 
@@ -68,7 +68,7 @@ public class Player : MonoBehaviour {
 		}else if(collider.gameObject.CompareTag("plant")){
 			var plant = collider.GetComponent<plant>();
 			plant.Die();
-			oxygenLevel += plant.GetOxygenLevel();
+			oxygenLevel = Mathf.Min(oxygenLevel + plant.GetOxygenLevel(),100);
 			GestionSound.instance.soundplantHarvest();
 		}
 	}
@@ -207,7 +207,8 @@ public class Player : MonoBehaviour {
 				GestionSound.instance.soundplantPlante();
 				noderef.plant();
 				isPlanting = false;
-				GameObject temp = (GameObject) Instantiate(plant, this.transform.position + this.transform.forward * 2 + Vector3.down*1.75f, plant.transform.rotation);
+				int i=Random.Range(0,plantliste.Length);
+				GameObject temp = (GameObject) Instantiate(plantliste[i], this.transform.position + this.transform.forward * 2 + Vector3.down*1.75f, plantliste[i].transform.rotation);
 				temp.GetComponent<plant>().noderef=noderef;
 			}
 		}

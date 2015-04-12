@@ -51,7 +51,7 @@ public class plant : MonoBehaviour {
 				growingState++;
 				growTimer = 0;
 
-				this.transform.position += new Vector3(0, 0.6f, 0);
+				this.transform.position += new Vector3(0, 0.5f, 0);
 				if(growingState == 3){
 					GetComponent<Collider>().enabled=true;
 				}
