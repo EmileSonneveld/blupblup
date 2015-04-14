@@ -42,6 +42,32 @@ public class text_script : MonoBehaviour {
 		"Suspendisse quis lorem tincidunt, luctus nulla vel, \n"+
 		"gravida nisi. Pellentesque sodales turpis ac turpis \n"+
 		"porttitor dictum. Curabitur non nisi ac enim dignissim \n"+
+
+		"When Aliens (R) wanted to invade the world, they seeked \n"+
+		"for the greatest nations to kidnap their people. But the \n"+
+		"Aliens (R) faced a big problem, most of the people \n"+
+		"commited suecide. After the big Alien conference, it was \n"+
+		"clear, Bruxelles had to be reconstructed on their planet.\n"+
+		
+		"After hours of intensive construction, the Aliens (R) had\n"+
+		" constructed the most perfect reconstruction of Bruxells \n"+
+		"on their planet ever. Now people could live in peace. \n"+
+		"After deporting whole human race to this place, one thing\n"+
+		" failed: The Aliens (r) didn't think of the fact that \n"+
+		"people can't survive onder water. That day was a sad day \n"+
+		"for humanity, everyone died. \n"+
+		
+		"No, not everyone, one man survived. Our hero was in a \n"+
+		"diving suit, and was able to breath just long enouf to \n"+
+		"survive till the setting of our game. The Aliens (r) \n"+
+		"didn't worry to much about the disparition of the human \n"+
+		"race. THey ate all the corpses on a national feast day \n"+
+		"and lived hapily ever after.\n"+
+		
+		"Our hero continious an epic battle for increasing his \n"+
+		"life quality. Join him in sseeking the forbidden artifact\n"+
+		" in the middle of neo Brussels. A better life may follow!\n"+
+
 		"ullamcorper. Mauris lacinia tellus ac odio rutrum, et \n"+
 		"tristique leo feugiat. In in elit id mi volutpat viverra \n"+
 		"eget id augue. Nam ullamcorper sem vel odio auctor, eget \n"+
@@ -161,21 +187,21 @@ public class text_script : MonoBehaviour {
 		"aliquam commodo, sagittis sit amet lacus.\n";
 
 
-	// Use this for initialization
-	void Start () {
-		//textMesh = GetComponent<TextMesh>();
+	void Start ()
+	{
 		textCompenent = GetComponent<Text>();
-		//text_all = textMesh.text;
 		textCompenent.text = "";
 	}
 
 	float timer = 0;
 
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		if(Input.GetKeyDown(KeyCode.Escape))
 			Destroy(gameObject);
 		if (!doDaStuff) return;
+		GetComponent<Text>().text = "lalala 0 "; 
+
 		timer += Time.deltaTime;
 		if(timer>0.3){
 			currentPos++;
